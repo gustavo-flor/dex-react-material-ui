@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material';
+import { FormControl, FormHelperText, Input, InputLabel } from '@mui/material';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
+import React, { useEffect, useState } from 'react';
 
 //Declaração do componente CriarTarefa, recebendo como props, do Componente ListarTarefa, os states handClose, tarefas e setTarefas
 const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
@@ -37,6 +36,16 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
     //Para inspecionarmos nosso código, uma boa estratégia é utilizarmos o console.log.
     //  Com o console.log, podemos visualizar o seu conteúdo na aba Console, no inspecionador de elementos, na janela do navegador
     console.log(`id: ${idTarefa} \n titulo: ${tituloTarefa} \n descrição: ${descricaoTarefa} \n inicio: ${inicioTarefa} \n fim: ${fimTarefa} \n recurso: ${recursoTarefa} \n status: ${statusTarefa}`);
+
+    if (inicioTarefa.length === 0 || fimTarefa.length === 0) {
+      alert('Data de início e fim são obrigatórias');
+      return;
+    }
+
+    if (inicioTarefa > fimTarefa) {
+      alert('Data de fim deve ser após data início');
+      return;
+    }
 
     setTarefas(
       [...tarefas, 
